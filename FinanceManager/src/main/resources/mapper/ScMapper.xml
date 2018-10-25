@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.ScMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Sc">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="SCid" jdbcType="VARCHAR" property="scid" />
+    <result column="Sno" jdbcType="VARCHAR" property="sno" />
+    <result column="Cno" jdbcType="VARCHAR" property="cno" />
+    <result column="Grade" jdbcType="INTEGER" property="grade" />
+  </resultMap>
+
+  <!--
+     自己定义模型与model中的StudentCourseSC对应
+    -->
+  <resultMap id="AllSelectResultMap" type="com.company.project.model.StudentCourseSC">
+    <result column="Sno" jdbcType="VARCHAR" property="sno" />
+    <result column="Cno" jdbcType="VARCHAR" property="cno" />
+
+    <result column="Grade" jdbcType="INTEGER" property="grade" />
+    <result column="Sname" jdbcType="VARCHAR" property="sname" />
+
+    <result column="Cname" jdbcType="VARCHAR" property="cname" />
+    <result column="Teacher" jdbcType="VARCHAR" property="teacher" />
+
+  </resultMap>
+
+  <select id="selectAllSC" resultMap="AllSelectResultMap" >
+    select scc.Sno,scc.Cno,scc.Grade,s.Sname,c.Cname,c.Teacher from sc scc
+     LEFT OUTER JOIN student s on s.Sno = scc.Sno
+      LEFT OUTER JOIN course c on c.Cno = scc.Cno
+  </select>
+
+
+
+
+
+</mapper>
