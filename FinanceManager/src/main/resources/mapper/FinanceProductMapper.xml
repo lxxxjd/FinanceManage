@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.FinanceProductMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.FinanceProduct">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="fpid" jdbcType="VARCHAR" property="fpid" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_term" jdbcType="VARCHAR" property="productTerm" />
+    <result column="purchase_amount" jdbcType="VARCHAR" property="purchaseAmount" />
+    <result column="risk_level" jdbcType="VARCHAR" property="riskLevel" />
+    <result column="introduce_pdf" jdbcType="VARCHAR" property="introducePdf" />
+  </resultMap>
+</mapper>

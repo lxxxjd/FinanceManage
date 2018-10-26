@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.UserHoldMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.UserHold">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="uhid" jdbcType="VARCHAR" property="uhid" />
+    <result column="fpid" jdbcType="VARCHAR" property="fpid" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="hold_money" jdbcType="DOUBLE" property="holdMoney" />
+    <result column="yesterday_income" jdbcType="DOUBLE" property="yesterdayIncome" />
+    <result column="sum_income" jdbcType="DOUBLE" property="sumIncome" />
+  </resultMap>
+</mapper>
