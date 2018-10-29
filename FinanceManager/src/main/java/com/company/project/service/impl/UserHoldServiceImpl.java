@@ -19,4 +19,8 @@ public class UserHoldServiceImpl extends AbstractService<UserHold> implements Us
     @Resource
     private UserHoldMapper userHoldMapper;
 
+    @Override
+    public UserHold findByUidAndFpid(String uid, String fpid) {
+        return userHoldMapper.selectByUidAndFpid(uid,fpid);
+    }
 }

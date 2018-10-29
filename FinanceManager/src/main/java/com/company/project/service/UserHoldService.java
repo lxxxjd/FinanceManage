@@ -8,4 +8,6 @@ import com.company.project.core.Service;
  */
 public interface UserHoldService extends Service<UserHold> {
 
+    UserHold findByUidAndFpid(String uid,String fpid);
+
 }

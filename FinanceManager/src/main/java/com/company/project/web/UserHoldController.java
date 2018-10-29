@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.BuyProduct;
+import com.company.project.model.Orders;
 import com.company.project.model.UserHold;
 import com.company.project.service.UserHoldService;
 import com.github.pagehelper.PageHelper;
@@ -9,7 +10,9 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2018/10/26.
@@ -54,17 +57,22 @@ public class UserHoldController {
 
     @PostMapping("/buyProduct")
     public Result buy(@RequestBody BuyProduct buyProduct) {
-        System.out.println(buyProduct.getFpid());
-        System.out.println(buyProduct.getBuyMoney());
-        UserHold userHold = userHoldService.findBy("uhid",buyProduct.getFpid());
-        if(userHold!=null){
-            userHold.setHoldMoney(userHold.getHoldMoney()+buyProduct.getBuyMoney());
-            System.out.println(userHold.toString());
-            userHoldService.update(userHold);
-        }else {
-           // System.out.println(userHold.toString());
+        try {
+            UserHold userHold = userHoldService.findByUidAndFpid(buyProduct.getUid(),buyProduct.getFpid());
+            if(userHold!=null){
+                userHold.setHoldMoney(userHold.getHoldMoney()+buyProduct.getBuyMoney());
+                userHoldService.update(userHold);
+            }else {
+                userHold = new UserHold(UUID.randomUUID().toString(), buyProduct.getFpid(), buyProduct.getUid(), buyProduct.getBuyMoney(),0.0, 0.0);
+                userHoldService.save(userHold);
+                Orders orders =new Orders(UUID.randomUUID().toString(), buyProduct.getUid(), buyProduct.getFpid(),
+                        "买入", new Date(), "余额买入", "余额",buyProduct.getBuyMoney(), "交易完成", new Date());
+            }
+            return ResultGenerator.genSuccessResult(userHold);
+        }catch (Exception e){
+            return ResultGenerator.genFailResult("error");
         }
-        return ResultGenerator.genSuccessResult(userHold);
+
     }
 
 

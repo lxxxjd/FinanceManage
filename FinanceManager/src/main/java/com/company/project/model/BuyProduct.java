@@ -3,6 +3,7 @@ package com.company.project.model;
 public class BuyProduct {
     private String fpid;
     private Double buyMoney;
+    private String uid;
 
     public String getFpid() {
         return fpid;
@@ -18,5 +19,13 @@ public class BuyProduct {
 
     public void setBuyMoney(Double buyMoney) {
         this.buyMoney = buyMoney;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
