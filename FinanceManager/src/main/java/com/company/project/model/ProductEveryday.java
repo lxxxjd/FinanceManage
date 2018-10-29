@@ -46,6 +46,7 @@ public class ProductEveryday {
     @Column(name = "arrival_time")
     private Date arrivalTime;
 
+
     /**
      * 获取编号
      *

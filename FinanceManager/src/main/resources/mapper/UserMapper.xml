@@ -18,7 +18,7 @@
 
 
 
-  <select id="selectByUserName"  resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="selectByUserName"  resultMap="BaseResultMap" >
     select * from user where user.username =#{username}
   </select>
 
