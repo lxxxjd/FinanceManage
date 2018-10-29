@@ -256,4 +256,20 @@ public class Orders {
     public Orders() {
 
     }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "oid='" + oid + '\'' +
+                ", uid='" + uid + '\'' +
+                ", fpid='" + fpid + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", createTime=" + createTime +
+                ", meanTransaction='" + meanTransaction + '\'' +
+                ", sourceDestination='" + sourceDestination + '\'' +
+                ", money=" + money +
+                ", state='" + state + '\'' +
+                ", incomeTime=" + incomeTime +
+                '}';
+    }
 }

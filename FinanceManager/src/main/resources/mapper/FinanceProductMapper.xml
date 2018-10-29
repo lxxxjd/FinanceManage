@@ -13,4 +13,8 @@
     <result column="risk_level" jdbcType="VARCHAR" property="riskLevel" />
     <result column="introduce_pdf" jdbcType="VARCHAR" property="introducePdf" />
   </resultMap>
+
+  <select id="selectByID"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from user where user.username =#{username}
+  </select>
 </mapper>

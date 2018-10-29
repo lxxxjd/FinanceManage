@@ -1,6 +1,7 @@
 package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.ProductContact;
 import com.company.project.model.ProductEveryday;
 import com.company.project.service.ProductEverydayService;
 import com.github.pagehelper.PageHelper;
@@ -47,6 +48,13 @@ public class ProductEverydayController {
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<ProductEveryday> list = productEverydayService.findAll();
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
+    @PostMapping("/listAllDetail")
+    public Result listAllDetail(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        PageHelper.startPage(page, size);
+        List<ProductContact> list = productEverydayService.findContact();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

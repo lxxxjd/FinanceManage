@@ -14,6 +14,24 @@
     <result column="arrival_time" jdbcType="DATE" property="arrivalTime" />
   </resultMap>
 
+  <resultMap id="AssociationMap" type="com.company.project.model.ProductContact">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="peid" jdbcType="VARCHAR" property="peid" />
+    <result column="seven_rate" jdbcType="VARCHAR" property="sevenRate" />
+    <result column="divided_income" jdbcType="DOUBLE" property="dividedIncome" />
+    <result column="fpid" jdbcType="VARCHAR" property="fpid" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="income_time" jdbcType="DATE" property="incomeTime" />
+    <result column="arrival_time" jdbcType="DATE" property="arrivalTime" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_term" jdbcType="VARCHAR" property="productTerm" />
+    <result column="purchase_amount" jdbcType="VARCHAR" property="purchaseAmount" />
+    <result column="risk_level" jdbcType="VARCHAR" property="riskLevel" />
+    <result column="introduce_pdf" jdbcType="VARCHAR" property="introducePdf" />
+</resultMap>
 
 
   <!--
@@ -22,8 +40,12 @@
   fp.product_type,fp.product_name,fp.product_term,fp.purchase_amount,fp.risk_level,fp.introduce_pdf
   from product_everyday pe
   LEFT OUTER JOIN finance_product fp on fp.fpid = pe.fpid
-
   -->
-
+  <select id="selectProduct"  resultMap="AssociationMap">
+    select pe.peid,pe.seven_rate,pe.divided_income,pe.fpid,pe.create_time,pe.income_time,pe.arrival_time,
+  fp.product_type,fp.product_name,fp.product_term,fp.purchase_amount,fp.risk_level,fp.introduce_pdf
+  from product_everyday pe
+  LEFT OUTER JOIN finance_product fp on fp.fpid = pe.fpid
+  </select>
 
 </mapper>

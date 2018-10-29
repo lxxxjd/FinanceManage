@@ -5,6 +5,7 @@ import com.company.project.model.BuyProduct;
 import com.company.project.model.Orders;
 import com.company.project.model.UserHold;
 import com.company.project.service.UserHoldService;
+import com.company.project.utils.DateUitls;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -58,23 +59,38 @@ public class UserHoldController {
     @PostMapping("/buyProduct")
     public Result buy(@RequestBody BuyProduct buyProduct) {
         try {
-            UserHold userHold = userHoldService.findByUidAndFpid(buyProduct.getUid(),buyProduct.getFpid());
-            if(userHold!=null){
-                userHold.setHoldMoney(userHold.getHoldMoney()+buyProduct.getBuyMoney());
-                userHoldService.update(userHold);
-            }else {
-                userHold = new UserHold(UUID.randomUUID().toString(), buyProduct.getFpid(), buyProduct.getUid(), buyProduct.getBuyMoney(),0.0, 0.0);
-                userHoldService.save(userHold);
-                Orders orders =new Orders(UUID.randomUUID().toString(), buyProduct.getUid(), buyProduct.getFpid(),
-                        "买入", new Date(), "余额买入", "余额",buyProduct.getBuyMoney(), "交易完成", new Date());
+            //增加持有的钱的数量
+            UserHold resultHold = userHoldService.addHold(buyProduct);
+            //增加一个订单
+            boolean result = userHoldService.saveOrder(buyProduct,"买入");
+            //返回结果
+            if(result == true&&resultHold != null)
+                return ResultGenerator.genSuccessResult(resultHold);
+            else{
+                return ResultGenerator.genFailResult("error");
             }
-            return ResultGenerator.genSuccessResult(userHold);
         }catch (Exception e){
             return ResultGenerator.genFailResult("error");
         }
-
     }
 
 
+    @PostMapping("/saleProduct")
+    public Result sale(@RequestBody BuyProduct buyProduct) {
+        try {
+            //减少持有的钱的数量
+            UserHold result = userHoldService.saleHold(buyProduct);
+            //增加一个订单
+            boolean result2 = userHoldService.saveOrder(buyProduct,"卖出");
+            //返回结果
+            if (result !=null && result2 ==true)
+                return ResultGenerator.genSuccessResult(result);
+            else {
+                return ResultGenerator.genFailResult("error2");
+            }
+        } catch (Exception e) {
+            return ResultGenerator.genFailResult("error");
+        }
+    }
 
 }
