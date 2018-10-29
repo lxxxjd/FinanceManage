@@ -3,7 +3,7 @@ package com.company.project.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Order {
+public class Orders {
     /**
      * 订单
      */

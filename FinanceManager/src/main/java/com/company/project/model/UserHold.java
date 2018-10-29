@@ -145,4 +145,16 @@ public class UserHold {
     public void setSumIncome(Double sumIncome) {
         this.sumIncome = sumIncome;
     }
+
+    @Override
+    public String toString() {
+        return "UserHold{" +
+                "uhid='" + uhid + '\'' +
+                ", fpid='" + fpid + '\'' +
+                ", uid='" + uid + '\'' +
+                ", holdMoney=" + holdMoney +
+                ", yesterdayIncome=" + yesterdayIncome +
+                ", sumIncome=" + sumIncome +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.BuyProduct;
 import com.company.project.model.UserHold;
 import com.company.project.service.UserHoldService;
 import com.github.pagehelper.PageHelper;
@@ -50,4 +51,22 @@ public class UserHoldController {
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
+
+    @PostMapping("/buyProduct")
+    public Result buy(@RequestBody BuyProduct buyProduct) {
+        System.out.println(buyProduct.getFpid());
+        System.out.println(buyProduct.getBuyMoney());
+        UserHold userHold = userHoldService.findBy("uhid",buyProduct.getFpid());
+        if(userHold!=null){
+            userHold.setHoldMoney(userHold.getHoldMoney()+buyProduct.getBuyMoney());
+            System.out.println(userHold.toString());
+            userHoldService.update(userHold);
+        }else {
+           // System.out.println(userHold.toString());
+        }
+        return ResultGenerator.genSuccessResult(userHold);
+    }
+
+
+
 }
