@@ -1,5 +1,6 @@
 package com.company.project.global;
 
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,4 +15,7 @@ public class GlobalContants {
 
         }
     }
+=======
+public class GlobalContants {
+>>>>>>> aebd931add4a5dd8c1d1d37c334dfe6a7bebed14
 }
