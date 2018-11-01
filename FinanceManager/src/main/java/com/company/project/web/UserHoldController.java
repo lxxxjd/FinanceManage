@@ -1,7 +1,9 @@
 package com.company.project.web;
+import com.alibaba.fastjson.JSONObject;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.BuyProduct;
+import com.company.project.model.Orders;
 import com.company.project.model.UserHold;
 import com.company.project.service.UserHoldService;
 import com.github.pagehelper.PageHelper;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2018/10/26.
@@ -21,7 +24,8 @@ public class UserHoldController {
     private UserHoldService userHoldService;
 
     @PostMapping("/add")
-    public Result add(UserHold userHold) {
+    public Result add(@RequestBody UserHold userHold) {
+        userHold.setUhid(UUID.randomUUID().toString());
         userHoldService.save(userHold);
         return ResultGenerator.genSuccessResult();
     }
@@ -46,10 +50,15 @@ public class UserHoldController {
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<UserHold> list = userHoldService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        try {
+            PageHelper.startPage(page, size);
+            List<UserHold> list = userHoldService.findAll();
+            PageInfo pageInfo = new PageInfo(list);
+            return ResultGenerator.genSuccessResult(pageInfo);
+        } catch (Exception e) {
+           return ResultGenerator.genFailResult("error");
+        }
+
     }
 
     @PostMapping("/buyProduct")
@@ -67,6 +76,17 @@ public class UserHoldController {
         return ResultGenerator.genSuccessResult(userHold);
     }
 
+    @PostMapping("/userholdByUID")
+    public Result userholdByUID(@RequestBody String uid){
+        try {
+            String key = JSONObject.parseObject(uid).getString("uid");
+            List<UserHold> userHolds = userHoldService.findByUid(key);
+            return ResultGenerator.genSuccessResult(userHolds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultGenerator.genFailResult("error");
+        }
+    }
 
 
 }

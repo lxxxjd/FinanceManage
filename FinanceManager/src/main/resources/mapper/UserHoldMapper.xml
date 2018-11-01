@@ -12,4 +12,7 @@
     <result column="yesterday_income" jdbcType="DOUBLE" property="yesterdayIncome" />
     <result column="sum_income" jdbcType="DOUBLE" property="sumIncome" />
   </resultMap>
+  <select id="selectByUid"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from user_hold where user_hold.uid =#{uid}
+  </select>
 </mapper>

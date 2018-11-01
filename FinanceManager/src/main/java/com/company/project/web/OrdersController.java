@@ -1,17 +1,19 @@
 package com.company.project.web;
+import com.alibaba.fastjson.JSONObject;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.Orders;
+import com.company.project.model.User;
 import com.company.project.service.OrdersService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.entity.Condition;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2018/10/29.
@@ -23,7 +25,9 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @PostMapping("/add")
-    public Result add(Orders orders) {
+    public Result add(@RequestBody Orders orders) {
+        orders.setOid(UUID.randomUUID().toString());
+        orders.setCreateTime(new Date());
         ordersService.save(orders);
         return ResultGenerator.genSuccessResult();
     }
@@ -48,9 +52,26 @@ public class OrdersController {
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<Orders> list = ordersService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        try {
+            PageHelper.startPage(0, 0);
+            List<Orders> list = ordersService.findAll();
+            PageInfo pageInfo = new PageInfo(list);
+            return ResultGenerator.genSuccessResult(pageInfo);
+        } catch (Exception e) {
+            return ResultGenerator.genFailResult("list_error");
+        }
     }
-}
+
+        @PostMapping("/orderByUID")
+        public Result orderByUID(@RequestBody String uid){
+            try {
+                String key = JSONObject.parseObject(uid).getString("uid");
+                List<Orders> orders = ordersService.findByUid(key);
+                return ResultGenerator.genSuccessResult(orders);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResultGenerator.genFailResult("error");
+            }
+        }
+    }
+

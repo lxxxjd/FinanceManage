@@ -16,4 +16,8 @@
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="income_time" jdbcType="TIMESTAMP" property="incomeTime" />
   </resultMap>
+
+  <select id="selectByUid"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from orders where orders.uid =#{uid}
+  </select>
 </mapper>

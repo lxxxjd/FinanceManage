@@ -2,10 +2,12 @@ package com.company.project.service;
 import com.company.project.model.UserHold;
 import com.company.project.core.Service;
 
+import java.util.List;
+
 
 /**
  * Created by CodeGenerator on 2018/10/26.
  */
 public interface UserHoldService extends Service<UserHold> {
-
+    public List<UserHold> findByUid(String uid);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +20,8 @@ public class UserHoldServiceImpl extends AbstractService<UserHold> implements Us
     @Resource
     private UserHoldMapper userHoldMapper;
 
+    @Override
+    public List<UserHold> findByUid(String uid) {
+        return userHoldMapper.selectByUid(uid);
+    }
 }

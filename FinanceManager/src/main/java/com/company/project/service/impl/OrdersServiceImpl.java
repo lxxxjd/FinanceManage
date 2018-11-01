@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +20,8 @@ public class OrdersServiceImpl extends AbstractService<Orders> implements Orders
     @Resource
     private OrdersMapper ordersMapper;
 
+    @Override
+    public List<Orders> findByUid(String uid) {
+       return ordersMapper.selectByUid(uid);
+    }
 }
