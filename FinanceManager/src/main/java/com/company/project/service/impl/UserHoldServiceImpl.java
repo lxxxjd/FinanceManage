@@ -12,12 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-<<<<<<< HEAD
 import java.util.List;
-=======
 import java.util.Date;
 import java.util.UUID;
->>>>>>> 7ed15ec682f522e1aa0324d24d4df33780da5e80
 
 
 /**
@@ -29,11 +26,10 @@ public class UserHoldServiceImpl extends AbstractService<UserHold> implements Us
     @Resource
     private UserHoldMapper userHoldMapper;
 
-<<<<<<< HEAD
     @Override
     public List<UserHold> findByUid(String uid) {
         return userHoldMapper.selectByUid(uid);
-=======
+    }
     @Resource
     private OrdersMapper ordersMapper;
 
@@ -94,6 +90,5 @@ public class UserHoldServiceImpl extends AbstractService<UserHold> implements Us
             return null;
         }
         return userHold;
->>>>>>> 7ed15ec682f522e1aa0324d24d4df33780da5e80
     }
 }
