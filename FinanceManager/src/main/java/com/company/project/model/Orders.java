@@ -239,4 +239,37 @@ public class Orders {
     public void setIncomeTime(Date incomeTime) {
         this.incomeTime = incomeTime;
     }
+
+    public Orders(String oid, String uid, String fpid, String orderType, Date createTime, String meanTransaction, String sourceDestination, Double money, String state, Date incomeTime) {
+        this.oid = oid;
+        this.uid = uid;
+        this.fpid = fpid;
+        this.orderType = orderType;
+        this.createTime = createTime;
+        this.meanTransaction = meanTransaction;
+        this.sourceDestination = sourceDestination;
+        this.money = money;
+        this.state = state;
+        this.incomeTime = incomeTime;
+    }
+
+    public Orders() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "oid='" + oid + '\'' +
+                ", uid='" + uid + '\'' +
+                ", fpid='" + fpid + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", createTime=" + createTime +
+                ", meanTransaction='" + meanTransaction + '\'' +
+                ", sourceDestination='" + sourceDestination + '\'' +
+                ", money=" + money +
+                ", state='" + state + '\'' +
+                ", incomeTime=" + incomeTime +
+                '}';
+    }
 }

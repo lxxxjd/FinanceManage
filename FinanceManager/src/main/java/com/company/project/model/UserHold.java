@@ -157,4 +157,17 @@ public class UserHold {
                 ", sumIncome=" + sumIncome +
                 '}';
     }
+
+    public UserHold() {
+        super();
+    }
+
+    public UserHold(String uhid, String fpid, String uid, Double holdMoney, Double yesterdayIncome, Double sumIncome) {
+        this.uhid = uhid;
+        this.fpid = fpid;
+        this.uid = uid;
+        this.holdMoney = holdMoney;
+        this.yesterdayIncome = yesterdayIncome;
+        this.sumIncome = sumIncome;
+    }
 }

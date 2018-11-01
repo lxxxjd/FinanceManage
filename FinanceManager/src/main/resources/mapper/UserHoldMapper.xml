@@ -12,7 +12,17 @@
     <result column="yesterday_income" jdbcType="DOUBLE" property="yesterdayIncome" />
     <result column="sum_income" jdbcType="DOUBLE" property="sumIncome" />
   </resultMap>
+<<<<<<< HEAD
   <select id="selectByUid"  resultMap="BaseResultMap" parameterType="java.lang.String">
     select * from user_hold where user_hold.uid =#{uid}
   </select>
+=======
+
+  <select id="selectByUidAndFpid"  resultMap="BaseResultMap" >
+     select * from user_hold where uid=#{uid} and fpid=#{fpid}
+  </select>
+
+
+
+>>>>>>> 7ed15ec682f522e1aa0324d24d4df33780da5e80
 </mapper>
