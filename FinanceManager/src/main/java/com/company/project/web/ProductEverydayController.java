@@ -1,8 +1,10 @@
 package com.company.project.web;
+import com.alibaba.fastjson.JSONObject;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.ProductContact;
 import com.company.project.model.ProductEveryday;
+import com.company.project.model.ProductEverydayAndTime;
 import com.company.project.service.ProductEverydayService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -28,7 +30,8 @@ public class ProductEverydayController {
 
     @PostMapping("/delete")
     public Result delete(@RequestBody String  id) {
-        productEverydayService.deleteById(id);
+        String key = JSONObject.parseObject(id).getString("id");
+        ProductEveryday productEveryday = productEverydayService.findById(key);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -40,22 +43,50 @@ public class ProductEverydayController {
 
     @PostMapping("/detail")
     public Result detail(@RequestBody String  id) {
-        ProductEveryday productEveryday = productEverydayService.findById(id);
-        return ResultGenerator.genSuccessResult(productEveryday);
+        try {
+            String key = JSONObject.parseObject(id).getString("id");
+            ProductEveryday productEveryday = productEverydayService.findById(key);
+            return ResultGenerator.genSuccessResult(productEveryday);
+        }catch (Exception e){
+            return ResultGenerator.genFailResult("error");
+        }
     }
+
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<ProductEveryday> list = productEverydayService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        try {
+            PageHelper.startPage(page, size);
+            List<ProductEveryday> list = productEverydayService.findAll();
+            PageInfo pageInfo = new PageInfo(list);
+            return ResultGenerator.genSuccessResult(pageInfo);
+        }catch (Exception e){
+            return ResultGenerator.genFailResult("error");
+        }
     }
     @PostMapping("/listAllDetail")
     public Result listAllDetail(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<ProductContact> list = productEverydayService.findContact();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        try {
+            PageHelper.startPage(page, size);
+            List<ProductContact> list = productEverydayService.findContact();
+            PageInfo pageInfo = new PageInfo(list);
+            return ResultGenerator.genSuccessResult(pageInfo);
+        }catch (Exception e){
+            return ResultGenerator.genFailResult("error");
+        }
+    }
+
+    @PostMapping("/listOneWeekRate")
+    public Result findProductByProductId(@RequestBody  String fpid){
+        try {
+            String key = JSONObject.parseObject(fpid).getString("fpid");
+            PageHelper.startPage(0, 0);
+            List<ProductEverydayAndTime> list = productEverydayService.findProductByProductId(key);
+            PageInfo pageInfo = new PageInfo(list);
+            return ResultGenerator.genSuccessResult(pageInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultGenerator.genFailResult("error");
+        }
     }
 }

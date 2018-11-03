@@ -12,17 +12,33 @@
     <result column="yesterday_income" jdbcType="DOUBLE" property="yesterdayIncome" />
     <result column="sum_income" jdbcType="DOUBLE" property="sumIncome" />
   </resultMap>
-<<<<<<< HEAD
-  <select id="selectByUid"  resultMap="BaseResultMap" parameterType="java.lang.String">
-    select * from user_hold where user_hold.uid =#{uid}
+
+  <resultMap id="UserHoldAndNameMap" type="com.company.project.model.UserHoldAndName">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="uhid" jdbcType="VARCHAR" property="uhid" />
+    <result column="fpid" jdbcType="VARCHAR" property="fpid" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="hold_money" jdbcType="DOUBLE" property="holdMoney" />
+    <result column="yesterday_income" jdbcType="DOUBLE" property="yesterdayIncome" />
+    <result column="sum_income" jdbcType="DOUBLE" property="sumIncome" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+  </resultMap>
+
+
+
+  <select id="selectByUid"  resultMap="UserHoldAndNameMap">
+    select uh.uhid,uh.fpid,uh.uid,uh.hold_money,uh.yesterday_income,uh.sum_income,fp.product_name
+    from user_hold uh
+    LEFT OUTER JOIN finance_product fp on fp.fpid = uh.fpid
+    where uh.uid =#{uid}
   </select>
-=======
+
 
   <select id="selectByUidAndFpid"  resultMap="BaseResultMap" >
      select * from user_hold where uid=#{uid} and fpid=#{fpid}
   </select>
 
 
-
->>>>>>> 7ed15ec682f522e1aa0324d24d4df33780da5e80
 </mapper>

@@ -19,4 +19,8 @@ public class FinanceProductServiceImpl extends AbstractService<FinanceProduct> i
     @Resource
     private FinanceProductMapper financeProductMapper;
 
+    @Override
+    public FinanceProduct FindByID(String ID) {
+        return financeProductMapper.selectByID(ID);
+    }
 }

@@ -8,57 +8,57 @@ public class Orders {
      * 订单
      */
     @Id
-    private String oid;
+    public String oid;
 
     /**
      * 用户id
      */
-    private String uid;
+    public String uid;
 
     /**
      * 产品id
      */
-    private String fpid;
+    public String fpid;
 
     /**
      * 订单类型/卖出，买入
      */
     @Column(name = "order_type")
-    private String orderType;
+    public String orderType;
 
     /**
      * 订单创建时间
      */
     @Column(name = "create_time")
-    private Date createTime;
+    public Date createTime;
 
     /**
      * 交易方式
      */
     @Column(name = "mean_transaction")
-    private String meanTransaction;
+    public String meanTransaction;
 
     /**
      * 来源/去处
      */
     @Column(name = "source_destination")
-    private String sourceDestination;
+    public String sourceDestination;
 
     /**
      * 交易金额
      */
-    private Double money;
+    public Double money;
 
     /**
      * 成功/失败
      */
-    private String state;
+    public String state;
 
     /**
      * 到账时间
      */
     @Column(name = "income_time")
-    private Date incomeTime;
+    public Date incomeTime;
 
     /**
      * 获取订单

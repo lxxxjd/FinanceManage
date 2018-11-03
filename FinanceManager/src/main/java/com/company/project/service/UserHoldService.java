@@ -2,6 +2,7 @@ package com.company.project.service;
 import com.company.project.model.BuyProduct;
 import com.company.project.model.UserHold;
 import com.company.project.core.Service;
+import com.company.project.model.UserHoldAndName;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface UserHoldService extends Service<UserHold> {
 
-    public List<UserHold> findByUid(String uid);
+    public List<UserHoldAndName> findByUid(String uid);
 
     public UserHold findByUidAndFpid(String uid,String fpid);
     public boolean saveOrder(BuyProduct buyProduct,String type);

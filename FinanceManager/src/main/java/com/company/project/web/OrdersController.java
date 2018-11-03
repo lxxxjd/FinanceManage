@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.alibaba.fastjson.JSONObject;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.OrderAndNameTime;
 import com.company.project.model.Orders;
 import com.company.project.model.User;
 import com.company.project.service.OrdersService;
@@ -66,7 +67,7 @@ public class OrdersController {
         public Result orderByUID(@RequestBody String uid){
             try {
                 String key = JSONObject.parseObject(uid).getString("uid");
-                List<Orders> orders = ordersService.findByUid(key);
+                List<OrderAndNameTime> orders = ordersService.findByUid(key);
                 return ResultGenerator.genSuccessResult(orders);
             } catch (Exception e) {
                 e.printStackTrace();

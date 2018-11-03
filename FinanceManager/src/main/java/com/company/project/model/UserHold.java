@@ -8,35 +8,35 @@ public class UserHold {
      * 编号
      */
     @Id
-    private String uhid;
+    protected String uhid;
 
     /**
      * 产品编号
      */
-    private String fpid;
+    protected String fpid;
 
     /**
      * 用户编号
      */
-    private String uid;
+    protected String uid;
 
     /**
      * 持有的资金
      */
     @Column(name = "hold_money")
-    private Double holdMoney;
+    protected Double holdMoney;
 
     /**
      * 昨日收益
      */
     @Column(name = "yesterday_income")
-    private Double yesterdayIncome;
+    protected Double yesterdayIncome;
 
     /**
      * 累计收益
      */
     @Column(name = "sum_income")
-    private Double sumIncome;
+    protected Double sumIncome;
 
     /**
      * 获取编号

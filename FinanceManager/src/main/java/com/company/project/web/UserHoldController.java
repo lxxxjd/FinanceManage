@@ -5,6 +5,7 @@ import com.company.project.core.ResultGenerator;
 import com.company.project.model.BuyProduct;
 import com.company.project.model.Orders;
 import com.company.project.model.UserHold;
+import com.company.project.model.UserHoldAndName;
 import com.company.project.service.UserHoldService;
 import com.company.project.utils.DateUitls;
 import com.github.pagehelper.PageHelper;
@@ -85,7 +86,7 @@ public class UserHoldController {
     public Result userholdByUID(@RequestBody String uid){
         try {
             String key = JSONObject.parseObject(uid).getString("uid");
-            List<UserHold> userHolds = userHoldService.findByUid(key);
+            List<UserHoldAndName> userHolds = userHoldService.findByUid(key);
             return ResultGenerator.genSuccessResult(userHolds);
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +105,7 @@ public class UserHoldController {
             if (result !=null && result2 ==true)
                 return ResultGenerator.genSuccessResult(result);
             else {
-                return ResultGenerator.genFailResult("error2");
+                return ResultGenerator.genFailResult("error");
             }
         } catch (Exception e) {
             return ResultGenerator.genFailResult("error");

@@ -17,7 +17,30 @@
     <result column="income_time" jdbcType="TIMESTAMP" property="incomeTime" />
   </resultMap>
 
-  <select id="selectByUid"  resultMap="BaseResultMap" parameterType="java.lang.String">
-    select * from orders where orders.uid =#{uid}
+
+  <resultMap id="OrderAndNameTimeMap" type="com.company.project.model.OrderAndNameTime">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="oid" jdbcType="VARCHAR" property="oid" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="fpid" jdbcType="VARCHAR" property="fpid" />
+    <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="mean_transaction" jdbcType="VARCHAR" property="meanTransaction" />
+    <result column="source_destination" jdbcType="VARCHAR" property="sourceDestination" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="income_time" jdbcType="TIMESTAMP" property="incomeTime" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+  </resultMap>
+
+
+
+  <select id="selectByUid"  resultMap="OrderAndNameTimeMap" parameterType="java.lang.String">
+    select orde.oid,orde.uid,orde.fpid,orde.order_type,orde.create_time,orde.mean_transaction,orde.source_destination,orde.money,orde.state,orde.income_time ,fp.product_name
+    from orders orde
+    LEFT OUTER JOIN finance_product fp on orde.fpid = fp.fpid
+    where orde.uid =#{uid}
   </select>
 </mapper>

@@ -5,6 +5,7 @@ import com.company.project.dao.UserHoldMapper;
 import com.company.project.model.BuyProduct;
 import com.company.project.model.Orders;
 import com.company.project.model.UserHold;
+import com.company.project.model.UserHoldAndName;
 import com.company.project.service.UserHoldService;
 import com.company.project.core.AbstractService;
 import com.company.project.utils.DateUitls;
@@ -27,7 +28,7 @@ public class UserHoldServiceImpl extends AbstractService<UserHold> implements Us
     private UserHoldMapper userHoldMapper;
 
     @Override
-    public List<UserHold> findByUid(String uid) {
+    public List<UserHoldAndName> findByUid(String uid) {
         return userHoldMapper.selectByUid(uid);
     }
     @Resource
