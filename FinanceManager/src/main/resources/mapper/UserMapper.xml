@@ -16,12 +16,18 @@
   <result column="account_password" jdbcType="VARCHAR" property="accountPassword" />
 </resultMap>
 
+  <resultMap id="LoginMap" type="com.company.project.model.Login">
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+
 
 
   <select id="selectByUserName"  resultMap="BaseResultMap" >
     select * from user where user.username =#{username}
   </select>
-
-
+  <select id="selectByUserNameAndPassword"  resultMap="LoginMap" >
+    select username,password from user where user.username =#{username} and user.password =#{password}
+  </select>
 
 </mapper>

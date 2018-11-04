@@ -1,9 +1,11 @@
 package com.company.project.service.impl;
 
 import com.company.project.dao.UserMapper;
+import com.company.project.model.Login;
 import com.company.project.model.User;
 import com.company.project.service.UserService;
 import com.company.project.core.AbstractService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,5 +29,10 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         }else {
             return false;
         }
+    }
+
+    @Override
+    public Login selectByUserNameAndPassword(String username, String password) {
+        return userMapper.selectByUserNameAndPassword(username,password);
     }
 }

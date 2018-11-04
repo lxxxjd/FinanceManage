@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.alibaba.fastjson.JSONObject;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.Login;
 import com.company.project.model.User;
 import com.company.project.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -86,6 +87,25 @@ public class UserController {
             return  ResultGenerator.genFailResult("error");
         }
     }
+
+
+    @PostMapping("/login")
+    public Result login(@RequestBody Login login) {
+        try {
+           String usename = login.getUsername();
+           String password = login.getPassword();
+           Login login1=userService.selectByUserNameAndPassword(usename,password);
+           if(login1==null){
+               return ResultGenerator.genSuccessResult();
+           }else{
+               return ResultGenerator.genSuccessResult(login1);
+           }
+        }catch (Exception e){
+            e.printStackTrace();
+            return  ResultGenerator.genFailResult("error");
+        }
+    }
+
 
 
     @PostMapping("/list")
