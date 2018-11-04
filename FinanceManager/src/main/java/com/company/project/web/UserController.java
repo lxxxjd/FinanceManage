@@ -16,6 +16,7 @@ import java.util.UUID;
 /**
 * Created by CodeGenerator on 2018/10/26.
 */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 public class UserController {

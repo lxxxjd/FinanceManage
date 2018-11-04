@@ -16,6 +16,7 @@ import java.util.List;
 /**
 * Created by CodeGenerator on 2018/10/26.
 */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/product/everyday")
 public class ProductEverydayController {
