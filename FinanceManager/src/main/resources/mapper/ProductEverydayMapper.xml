@@ -56,6 +56,15 @@
   where pe.create_time =#{create_time}
   </select>
 
+
+  <select id="selectProductById"  resultMap="AssociationMap">
+    select pe.peid,pe.seven_rate,pe.divided_income,pe.fpid,pe.create_time,pe.income_time,pe.arrival_time,
+    fp.product_type,fp.product_name,fp.product_term,fp.purchase_amount,fp.risk_level,fp.introduce_pdf
+    from product_everyday pe
+    LEFT OUTER JOIN finance_product fp on fp.fpid = pe.fpid
+    where pe.create_time =#{create_time} AND pe.fpid=#{fpid}
+  </select>
+
   <select id="selectProductByProductId"  resultMap="ProductEverydayAndTimeMap">
     select * from product_everyday
     where fpid =#{fpid}

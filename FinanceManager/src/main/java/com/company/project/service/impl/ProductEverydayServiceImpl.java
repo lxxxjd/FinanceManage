@@ -40,4 +40,10 @@ public class ProductEverydayServiceImpl extends AbstractService<ProductEveryday>
         }
         return list;
     }
+
+    @Override
+    public ProductContact findContactById(String fpid) {
+        ProductContact productContact= productEverydayMapper.selectProductById(createDate,fpid);
+        return productContact;
+    }
 }

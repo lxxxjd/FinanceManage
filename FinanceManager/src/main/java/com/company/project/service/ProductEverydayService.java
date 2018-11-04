@@ -14,5 +14,7 @@ import java.util.List;
 public interface ProductEverydayService extends Service<ProductEveryday> {
     public List<ProductContact> findContact();//连接产品与该产品收益信息
 
+    public ProductContact findContactById(String  fpid);//连接产品与该产品收益信息
+
     public List<ProductEverydayAndTime> findProductByProductId(@Param("fpid") String  fpid); //查询过去一周的收益率列表
 }

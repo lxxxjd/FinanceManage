@@ -43,11 +43,11 @@ public class ProductEverydayController {
     }
 
     @PostMapping("/detail")
-    public Result detail(@RequestBody String  id) {
+    public Result detail(@RequestBody String  fpid) {
         try {
-            String key = JSONObject.parseObject(id).getString("id");
-            ProductEveryday productEveryday = productEverydayService.findById(key);
-            return ResultGenerator.genSuccessResult(productEveryday);
+            String key = JSONObject.parseObject(fpid).getString("fpid");
+            ProductContact productContact = productEverydayService.findContactById(key);
+            return ResultGenerator.genSuccessResult(productContact);
         }catch (Exception e){
             return ResultGenerator.genFailResult("error");
         }
